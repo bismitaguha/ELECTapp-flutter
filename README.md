@@ -5,7 +5,7 @@ A new Flutter application.
 ## About
 
 This is a Flutter built app which can be used for viewing SAC/Bhawan Election details regarding candidates, credentials, manifestos and others. This helps in providing all information at one go to the voters.
-Simplified with many features ELECTapp helps you make a right decision.
+Simplified with many features [ELECTapp](https://github.com/bismitaguha/ELECTapp) helps you make a right decision.
 
 ## Getting Started
 
