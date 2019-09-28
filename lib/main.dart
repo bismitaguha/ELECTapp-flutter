@@ -1,16 +1,61 @@
 import 'package:elect_app/screens/all.dart';
 import 'package:flutter/material.dart';
-//import 'package:elect_app/routes/Routes.dart';
 
 void main() {
 
   runApp(
-    MaterialApp(
+    new MaterialApp(
       title: "ELECTapp",
-      home: CandidatesPage(),
+      home: Categories(),
+        routes: <String, WidgetBuilder> {
+          '/candidates': (BuildContext context) => new CandidatesPage(),
+          '/compare' : (BuildContext context) => new ComparePage(),
+          '/followed_posts' : (BuildContext context) => new FollowedPostsPage(),
+          '/categories' : (BuildContext context) => new Categories(),
+          '/forum': (BuildContext context) => new ForumPost(),
+        }
     ) //MaterialApp
   );
 }
+
+//class DBConnection {
+//
+//  static DBConnection _instance;
+//
+//  final String _host = "10.76.0.80";
+//  final String _port = "27017";
+//  final String _dbName = "test";
+//  Db _db;
+//
+//  static getInstance(){
+//    if(_instance == null) {
+//      _instance = DBConnection();
+//    }
+//    return _instance;
+//  }
+//
+//  Future<Db> getConnection() async{
+//    if (_db == null){
+//      try {
+//        _db = Db(_getConnectionString());
+//        await _db.open();
+//        print('connected');
+//      } catch(e){
+//        print(e);
+//      }
+//    }
+//    return _db;
+//  }
+//
+//  _getConnectionString(){
+//    return "mongodb://$_host:$_port/$_dbName";
+//  }
+//
+//  closeConnection() {
+//    _db.close();
+//  }
+//
+//}
 
 class Categories extends StatefulWidget {
   @override
@@ -20,26 +65,41 @@ class Categories extends StatefulWidget {
 }
 
 class _CategoriesState extends State<Categories> {
+//  int id;
+//  String post;
+//  String url = 'http://10.76.0.80:5000/get/Candidates/Hostel';
+//  List list = List();
+//  var isLoading = false;
+
   @override
-  Widget build(BuildContext context){
-    return Scaffold(
-      drawer: AppDrawer(),
-      appBar: AppBar(
-        title: Text("Categories"),
-      ),
-      body:Container(
-        margin: EdgeInsets.all(20.0),
-        child: Column(
-          children: <Widget> [
-            Text(
-              "List of Categories",
-              style: TextStyle(fontSize: 20.0),
-            )
-          ]
-        ),
-      )
-    );
-  }
+  Widget build(BuildContext context) {
+      return Scaffold(
+          drawer: AppDrawer(),
+          appBar: AppBar(
+            title: Text("Categories"),
+          ),
+          body: Container(
+            margin: EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                new Padding(
+                  padding: EdgeInsets.only(left: 10.0, top: 25.0),
+                  child: Text("Academics", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
+                ),
+                new Padding(
+                  padding: EdgeInsets.only(left: 10.0, top: 25.0),
+                  child: Text("Technical", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
+                ),
+                new Padding(
+                  padding: EdgeInsets.only(left: 10.0, top: 25.0),
+                  child: Text("Sports",  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),),
+                )
+              ],
+            ),
+          )
+      );
+    }
 }
 
 class AppDrawer extends StatelessWidget {
@@ -63,21 +123,23 @@ class AppDrawer extends StatelessWidget {
               Divider(color: Colors.black,),
               _createDrawerItem(
                 icon: Icons.category,
-                text: 'Categories',),
+                text: 'Categories',
+                onTap: () => Navigator.of(context).pushNamed('/categories'),
+              ),
               _createDrawerItem(
                   icon: Icons.group,
                   text: 'Candidates',
-//                  onTap: () => Navigator.pushNamed(context, Routes.candidates),
+                  onTap: () => Navigator.of(context).pushNamed('/candidates'),
                 ),
               _createDrawerItem(
                 icon: Icons.compare,
-                text: 'Compare',
-//                onTap: () => Navigator.pushNamed(context, Routes.compare),
+                text: 'Debate',
+                onTap: () => Navigator.of(context).pushNamed('/compare'),
               ),
               _createDrawerItem(
                 icon: Icons.bookmark,
                 text: 'Followed Posts',
-//                onTap: () => Navigator.pushNamed(context, Routes.followed_posts),
+                onTap: () => Navigator.of(context).pushNamed('/followed_posts'),
               ),
               Divider(color: Colors.black, indent: 10.0, endIndent: 10.0,),
               _createDrawerItem(
